@@ -37,4 +37,8 @@ class Volunteer
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
 
+  # def project
+  #   Project.find(self.project_id)
+  # end
+
 end
