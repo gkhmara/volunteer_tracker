@@ -19,7 +19,7 @@ get('/projects') do
 end
 
 get('/projects/new') do
-  erb(:new_album)
+  erb(:new_project)
 end
 
 get('/projects/:id') do
@@ -55,7 +55,7 @@ delete('/projects/:id') do
 end
 
 get('/projects/:id/volunteers/:volunteer_id') do
-  @volunteer = Volunteer.find(params[:volunteer_id]).to_i())
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i())
   erb(:volunteer)
 end
 
