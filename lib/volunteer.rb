@@ -49,8 +49,8 @@ class Volunteer
   end
 
 
-  # def project
-  #   Project.find(self.project_id)
-  # end
+  def project
+    Project.find(@project_id)
+  end
 
 end
