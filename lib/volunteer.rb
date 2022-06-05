@@ -25,7 +25,7 @@ class Volunteer
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers(name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
 
@@ -35,6 +35,20 @@ class Volunteer
     project_id = volunteer.fetch("project_id").to_i
     id = volunteer.fetch("id").to_i
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
+  end
+
+  def update(name, project_id)
+    @name = name
+    @project_id = project_id
+    DB.exec("UPDATE volunteers SET name = '#{@name}', project_id = #{@project_id} WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
+  end
+
+  def self.clear
+    DB.exec("DELETE FROM volunteers *;")
   end
 
   def self.find_by_project(prj_id)
@@ -47,7 +61,6 @@ class Volunteer
     end
     volunteers
   end
-
 
   def project
     Project.find(@project_id)
